@@ -18,5 +18,6 @@ public class Child {
     @Column(nullable = false, name = "LAST_NAME")
     private String lastName;
     @Column(nullable = false, name = "AGE")
+
     private Integer age;
 }

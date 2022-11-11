@@ -1,0 +1,14 @@
+POST http://localhost:8080/parents
+Accept: application/json
+Content-Type: application/json
+
+
+{
+  "id": null,
+  "firstName" : "Jan",
+  "lastName" : "Kukła",
+  "age" : 15
+}
+
+###
+GET http://localhost:8080/parents/2

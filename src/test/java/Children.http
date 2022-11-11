@@ -1,0 +1,10 @@
+POST http://localhost:8080/children
+Accept: application/json
+Content-Type: application/json
+
+{
+"id": null,
+  "firstName": "Kasia",
+  "lastName" : "Kowalska",
+  "age": 16
+}
