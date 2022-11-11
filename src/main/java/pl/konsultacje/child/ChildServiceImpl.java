@@ -56,7 +56,6 @@ public class ChildServiceImpl implements ChildService {
                 .setParent(child.getParent());
 
         Child response = saveChild(childMapper.childDto(childEntity));
-        System.out.println("response map to Dto = " + response);
         return response;
 
     }

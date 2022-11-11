@@ -15,10 +15,10 @@ public class ChildMapper {
 
     public Child maptoEntity(ChildDto childDto){
 
-//        Long parentId = childDto.getParentId();
-//        System.out.println("Parent id = "+parentId);
+        Long parentId = childDto.getParentId();
+        System.out.println("Parent id = "+parentId);
 
-        Parent parent = parentRepo.findById(childDto.getId()).orElseThrow(() -> new RuntimeException());
+        Parent parent = parentRepo.findById(childDto.getParentId()).orElseThrow(() -> new RuntimeException());
 
         Child child = new Child()
                .setId(childDto.getId())
