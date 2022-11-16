@@ -3,8 +3,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-"id": null,
+  "id": 1,
   "firstName": "Kasia",
-  "lastName" : "Kowalska",
-  "age": 16
+  "lastName": "Kowalska",
+  "age": 16,
+  "parentId": 1
 }

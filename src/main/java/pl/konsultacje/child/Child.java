@@ -1,8 +1,11 @@
 package pl.konsultacje.child;
 
 import lombok.Data;
+import pl.konsultacje.parent.Parent;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,6 +21,11 @@ public class Child {
     @Column(nullable = false, name = "LAST_NAME")
     private String lastName;
     @Column(nullable = false, name = "AGE")
-
     private Integer age;
+    @ManyToOne
+    Parent parent;
+
+
+
+
 }
