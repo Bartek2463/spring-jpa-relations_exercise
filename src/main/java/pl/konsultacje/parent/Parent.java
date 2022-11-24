@@ -2,8 +2,6 @@ package pl.konsultacje.parent;
 
 
 import lombok.Data;
-import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import pl.konsultacje.child.Child;
 
 import javax.persistence.*;
@@ -25,6 +23,7 @@ public class Parent {
     private String lastName;
     @Column(nullable = false, name = "AGE")
     private Integer age;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "parent")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
+    @Transient
     Set<Child> childSet = new HashSet<>();
 }

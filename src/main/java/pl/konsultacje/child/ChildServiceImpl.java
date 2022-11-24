@@ -1,21 +1,24 @@
 package pl.konsultacje.child;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.konsultacje.parent.Parent;
 import pl.konsultacje.parent.ParentRepo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class ChildServiceImpl implements ChildService {
 
     private ChildRepo childRepo;
+
+    private ChildMapper childMapper;
     private ParentRepo parentRepo;
 
-    public ChildServiceImpl(ChildRepo childRepo, ParentRepo parentRepo) {
-        this.childRepo = childRepo;
-        this.parentRepo = parentRepo;
-    }
+
 
     @Override
     public List<Child> findAllChildren() {
@@ -35,21 +38,32 @@ public class ChildServiceImpl implements ChildService {
     }
 
     @Override
-    public Child updateByChildId(Child request, Long id) {
+    public Child updateByChildId(ChildDto childDto, Long id) {
 
         Child childEntity = childRepo.findById(id).orElseThrow(() -> new RuntimeException("Child doesnt exists"));
 
-        childEntity.setFirstName(request.getFirstName());
-        childEntity.setLastName(request.getLastName());
-        childEntity.setAge(request.getAge());
+        Child child = childMapper.mapToEntity(childDto);
+        System.out.println("map to entity = " + child.getParent());
 
-        Child response = saveChild(childEntity);
+        childEntity.setId(child.getId())
+                .setFirstName(child.getFirstName())
+                .setLastName(child.getLastName())
+                .setAge(child.getAge())
+                .setParent(child.getParent());
+
+        Child response = saveChild(childMapper.childDto(childEntity));
         return response;
     }
 
     @Override
-    public Child saveChild(Child child) {
-        return childRepo.saveAndFlush(child);
+    public Child saveChild(ChildDto childDto) {
+        Child child = childMapper.mapToEntity(childDto);
+        childRepo.saveAndFlush(child);
+        Parent parent = child.getParent();
+        parent.setChildSet(Set.of());
+        parentRepo.save(parent);
+        return child;
+
     }
 
     @Override

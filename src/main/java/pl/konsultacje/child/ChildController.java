@@ -22,14 +22,14 @@ public class ChildController {
     }
 
     @PostMapping("/children")
-    public Child saveChild(@RequestBody Child child) {
-        return service.saveChild(child);
+    public Child saveChild(@RequestBody ChildDto childDto) {
+        return service.saveChild(childDto);
     }
 
     @PutMapping("/children/{id}")
     public Child updateChild(@PathVariable("id") Long id,
-                             @RequestBody Child child) {
-        return service.updateByChildId(child, id);
+                             @RequestBody ChildDto childDto) {
+        return service.updateByChildId(childDto, id);
     }
 
     @DeleteMapping("/children/{id}")
